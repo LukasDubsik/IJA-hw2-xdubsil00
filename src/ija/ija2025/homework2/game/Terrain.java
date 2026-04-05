@@ -11,7 +11,7 @@ public enum Terrain {
     MOUNTAIN("M"),
     WATER("W");
 
-    private String val;
+    private String val; ///< Holder for the String value of the enum
 
     /**
      * @brief Constructor of the Terrain enum
