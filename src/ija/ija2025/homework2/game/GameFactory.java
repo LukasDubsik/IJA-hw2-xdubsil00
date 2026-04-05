@@ -3,6 +3,10 @@ package ija.ija2025.homework2.game;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @class GameFactory
+ * @brief Class for construction of the Game class from the input map
+ */
 public class GameFactory {
     
     /**
@@ -12,6 +16,12 @@ public class GameFactory {
 
     }  
 
+    /**
+     * @brief Taking the input map, convert it into internal enum format and then init the Game class.
+     * 
+     * @param map The String map format (individual elems describing the terrain)
+     * @return The created Game class from the input map in array String form
+     */
     public static Game createGame(String[] map) {
         // Check that the input is valid
         if (map == null || map.length == 0) {
@@ -30,7 +40,7 @@ public class GameFactory {
             }
 
             String row_proc = row.trim();
-
+ 
             if (row_proc.isEmpty()) {
                 throw new IllegalArgumentException("Map can't have empty rows.");
             }
