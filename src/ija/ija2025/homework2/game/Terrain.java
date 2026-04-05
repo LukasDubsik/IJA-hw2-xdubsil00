@@ -5,21 +5,31 @@ package ija.ija2025.homework2.game;
  * @brief The individual Terrain types of the game
  */
 public enum Terrain {
-    // List of the types and their names of the Terrain
-    PLAIN("P"),
-    FOREST("F"),
-    MOUNTAIN("M"),
-    WATER("W");
+    // List of the types and their names of the Terrain and values
+    // Goes as: NAME, DEFENCE_BONUS, INFANTRY_COST, VEHICLE_COST
+    PLAIN("P", 1, 1, 1),
+    FOREST("F", 2, 1, 2),
+    MOUNTAIN("M", 4, 2, Integer.MAX_VALUE),
+    WATER("W", 0, Integer.MAX_VALUE, Integer.MAX_VALUE),
+    CITY("C", 3, 1, 1),
+    FACTORY("T", 3, 1, 1),
+    HQ("H", 4, 1, 1);
 
     private String val; ///< Holder for the String value of the enum
+    private int defence_bonus; ///< Value for defence
+    private int infantry_cost; ///< Value of cost for infantry to cross
+    private int vehicle_cost;  ///< Value of cost for vehicle to cross
 
     /**
      * @brief Constructor of the Terrain enum
      * 
      * @param val_ The String value of the enum.
      */
-    Terrain(String val_) {
+    Terrain(String val_, int defence_bonus_, int infantry_cost_, int vehicle_cost_) {
         this.val = val_;
+        this.defence_bonus = defence_bonus_;
+        this.infantry_cost = infantry_cost_;
+        this.vehicle_cost = vehicle_cost_;
     }
 
     /**
@@ -43,6 +53,9 @@ public enum Terrain {
             case "F" -> FOREST;
             case "M" -> MOUNTAIN;
             case "W" -> WATER;
+            case "C" -> CITY;
+            case "T" -> FACTORY;
+            case "H" -> HQ;
             default -> throw new IllegalArgumentException("Unsupported terrain value: " + type_proc);
         };
     }
