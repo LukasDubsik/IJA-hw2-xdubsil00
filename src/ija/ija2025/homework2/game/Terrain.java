@@ -1,5 +1,9 @@
 package ija.ija2025.homework2.game;
 
+/**
+ * @enum Terrain
+ * @brief The individual Terrain types of the game
+ */
 public enum Terrain {
     // List of the types and their names of the Terrain
     PLAIN("P"),
@@ -9,10 +13,21 @@ public enum Terrain {
 
     private String val;
 
+    /**
+     * @brief Constructor of the Terrain enum
+     * 
+     * @param val_ The String value of the enum.
+     */
     Terrain(String val_) {
         this.val = val_;
     }
 
+    /**
+     * @brief Given enum in teh String form, create from it the enum
+     * 
+     * @param type The string enum value.
+     * @return The enum created from teh String input.
+     */
     public static Terrain convert(String type) {
         // Check that the input isn't null
         if (type == null || type.trim().length() != 0) {
