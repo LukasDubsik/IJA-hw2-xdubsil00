@@ -36,30 +36,65 @@ public enum UnitType {
 
     // Functions to acces the values of the class
 
+    /**
+     * @brief Get the Unit type name
+     * 
+     * @return The unit type name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * @brief Get the Unit maximum hp
+     * 
+     * @return The unit maximum hp
+     */
     public int getMaxHP() {
         return this.max_hp;
     }
 
+    /**
+     * @brief Get the Unit price
+     * 
+     * @return The unit price
+     */
     public int getPrice() {
         return this.price;
     }
 
+    /**
+     * @brief Get the Unit movement type
+     * 
+     * @return The unit movement type
+     */
     public MovementType getMovementType() {
         return this.movement_type;
     }
 
+    /**
+     * @brief Get the Unit movement value
+     * 
+     * @return The unit movement value
+     */
     public int getMovement() {
         return this.movement;
     }
 
+    /**
+     * @brief Get the Unit minimum attack range
+     * 
+     * @return The unit minimum attack range
+     */
     public int getMinAttackRange() {
         return this.min_attack_range;
     }
 
+    /**
+     * @brief Get the Unit maximum attack range
+     * 
+     * @return The unit maximum attack range
+     */
     public int getMaxAttackRange() {
         return this.max_attack_range;
     }
