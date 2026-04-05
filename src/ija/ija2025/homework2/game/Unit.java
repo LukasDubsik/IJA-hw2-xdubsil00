@@ -24,4 +24,11 @@ public class Unit {
         this.current_hp = unitType.getMaxHP();
     }
 
+    /**
+     * @brief Convert to String representation
+     */
+    @Override
+    public String toString() {
+        return "{" + unitType.getName() + position.toString() + "[" + current_hp + "]}";
+    }
 }
