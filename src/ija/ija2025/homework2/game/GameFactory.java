@@ -10,7 +10,7 @@ public class GameFactory {
      */
     private GameFactory() {
 
-    } 
+    }  
 
     public static Game createGame(String[] map) {
         // Check that the input is valid
@@ -61,7 +61,7 @@ public class GameFactory {
         }
 
         // Create the final array holder of the map
-        Terrain[][] board_terrain = rows.toArray(Terrain[][]:new);
+        Terrain[][] board_terrain = rows.toArray(Terrain[][]::new);
 
         // Return the create game from the map
         return new Game(board_terrain);
