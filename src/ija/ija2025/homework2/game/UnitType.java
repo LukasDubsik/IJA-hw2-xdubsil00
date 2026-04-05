@@ -8,13 +8,13 @@ public enum UnitType {
     TANK("Tank", 100, 7000, MovementType.VEHICLE, 6, 1, 1),
     ARTILLERY("Artillery", 100, 6000, MovementType.VEHICLE, 5, 2, 3);
 
-    private final String name; ///< Units name
-    private final int max_hp; ///< The maximum HP of the unit
-    private final int price; ///< The price of the unit to deploy
-    private final MovementType movement_type; ///< What type of movement is available
-    private final int movement; ///< The movement range of the unit
-    private final int min_attack_range; ///< The minimum attack range
-    private final int max_attack_range; /// The maximum attack range
+    private String name; ///< Units name
+    private int max_hp; ///< The maximum HP of the unit
+    private int price; ///< The price of the unit to deploy
+    private MovementType movement_type; ///< What type of movement is available
+    private int movement; ///< The movement range of the unit
+    private int min_attack_range; ///< The minimum attack range
+    private int max_attack_range; /// The maximum attack range
 
     /**
      * @brief Constructor of the UnitType enum
@@ -32,6 +32,36 @@ public enum UnitType {
         this.movement = movement_;
         this.min_attack_range = min_attack_range_;
         this.max_attack_range = max_attack_range_;
+    }
+
+    // Functions to acces the values of the class
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getMaxHP() {
+        return this.max_hp;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public MovementType getMovementType() {
+        return this.movement_type;
+    }
+
+    public int getMovement() {
+        return this.movement;
+    }
+
+    public int getMinAttackRange() {
+        return this.min_attack_range;
+    }
+
+    public int getMaxAttackRange() {
+        return this.max_attack_range;
     }
 
     /**
