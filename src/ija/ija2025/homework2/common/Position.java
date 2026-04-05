@@ -7,5 +7,11 @@ package ija.ija2025.homework2.common;
  * @param column zero-based column index
  */
 public record Position(int row, int column) {
-
+    /**
+     * @brief Convert teh position to expected string format
+     */
+    @Override
+    public String toString() {
+        return ("[" + row + "," + column + "]");
+    }
 }
