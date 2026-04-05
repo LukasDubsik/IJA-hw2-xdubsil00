@@ -1,6 +1,10 @@
 package ija.ija2025.homework2.game;
 
+import ija.ija2025.homework2.common.Position;
+
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @class Game
@@ -9,7 +13,9 @@ import java.util.Arrays;
 public class Game {
 
     // The values held by the class
-    Terrain[][] map;
+    private Terrain[][] map; ///< The map of the game
+    private Map<Position, Unit> units_map = new HashMap<>(); ///< Position to unit
+
     
     /**
      * @brief The constructor of the Game class
@@ -19,6 +25,36 @@ public class Game {
     Game(Terrain[][] map_) {
         // Make sure the games are independent by copying the input map
         this.map = copyInputMap(map_);
+    }
+
+    /**
+     * @brief Create a new unit within the game
+     * 
+     * @param type The unit type -> Infantry/Tannk/artilerry
+     * @param owner Who wons this unit within the game
+     * @param row On which row the unit stands
+     * @param column On which column the unit stands
+     * 
+     * @return The newly created Unit within the game.
+     */
+    public Unit createUnit(String type, String owner, int row, int column) {
+        // Get the unit values based on its type
+        UnitType unit_type = UnitType.convert(type);
+        // Set its position
+        Position position = new Position(row, column);
+
+        // Check that the position is not yet occupied
+        // If the position has key (something is "standing" on it)
+        if (units_map.containsKey(position)) {
+            throw new IllegalArgumentException("Map position is already occupied");
+        }
+
+        // Create the unit if all passes
+        Unit unit = new Unit(unit_type, owner, position);
+        // Set the unit position within the game
+        units_map.put(position, unit);
+
+        return unit;
     }
 
     /**
