@@ -24,6 +24,44 @@ public class Unit {
         this.current_hp = unitType.getMaxHP();
     }
 
+    // Get teh values of the Unit
+
+    /**
+     * @brief Get the unit's type
+     * 
+     * @return The unit's type
+     */
+    public UnitType getUnitType() {
+        return unitType;
+    }
+
+    /**
+     * @brief Get the unit's owner
+     * 
+     * @return The unit's owner
+     */
+    public String getOwner() {
+        return owner;
+    }
+
+    /**
+     * @brief Get the unit's position
+     * 
+     * @return The unit's position
+     */
+    public Position getPosition() {
+        return position;
+    }
+
+    /**
+     * @brief Get the unit's current HP
+     * 
+     * @return The unit's current HP
+     */
+    public int getCurrentHp() {
+        return current_hp;
+    }
+
     /**
      * @brief Convert to String representation
      */
