@@ -87,10 +87,20 @@ public class Game {
      * @return The newly created Unit within the game.
      */
     public Unit createUnit(String type, String owner, int row, int column) {
+        // Check the owner validity
+        if (owner == null) {
+            throw new IllegalArgumentException("Owner can't be empty!");
+        }
+
         // Get the unit values based on its type
         UnitType unit_type = UnitType.convert(type);
         // Set its position
         Position position = new Position(row, column);
+
+        // Check that the position is valid
+        if (!isInside(position)) {
+            throw new IllegalArgumentException("Position is outside the game!");
+        }
 
         // Check that the position is not yet occupied
         // If the position has key (something is "standing" on it)
@@ -122,9 +132,9 @@ public class Game {
 
         // Check at other possibilities
 
-        // Can't move in same position
+        // Can move in the same position -> like artillery
         if (from.equals(to)) {
-            return false;
+            return true;
         }
 
         // Can't move outside of teh board
