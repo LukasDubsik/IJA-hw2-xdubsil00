@@ -2,12 +2,16 @@ package ija.ija2025.homework2.game;
 
 import ija.ija2025.homework2.common.Position;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 /**
  * @class Game
@@ -78,6 +82,79 @@ public class Game {
         Map<Position, Integer> best = new HashMap<>();
         // The search queu to explore -> Djikstra
         PriorityQueue<SearchNode> frontier = new PriorityQueue<>(new SearchNodeComparator());
+        // The final set of reachable tiles
+        Set<Position> reachable = new HashSet<>();
+
+        // Start the frontier of expansion with the starting point
+        // The score is zero as no cost to get where it is already there
+        frontier.add(new SearchNode(pos, 0));
+
+        // Add to the best cost map (since the start will always be the best -> can't go below zero)
+        best.put(pos, 0);
+
+        // Iterate until there are things to explore
+        while (!frontier.isEmpty()) {
+            // Pop the current node
+            SearchNode current_node = frontier.poll();
+            // Pop the node value that can be in the best found
+            Integer best_so_far = best.get(current_node.pos);
+
+            // If it is worse, break, we have already a better option
+            if (best_so_far != null && current_node.score > best_so_far) {
+                continue;
+            }
+
+            // Create a list of neighbors then, this node is worth exploring
+            List<Position> neighbors = new ArrayList<>();
+            // Add the individual neighbors
+            neighbors.add(new Position(pos.row() - 1, pos.column()));
+            neighbors.add(new Position(pos.row() + 1, pos.column()));
+            neighbors.add(new Position(pos.row(), pos.column() - 1));
+            neighbors.add(new Position(pos.row(), pos.column() + 1));
+
+            // Then for each of the neighbors, compute cost
+            for (Position neigh : neighbors) {
+                // Check if it is inside the bounds - if not, skip
+                if (!isInside(neigh)) {
+                    continue;
+                }
+
+                // Check if it is occupied - ignore
+                if (units_map.containsKey(neigh)) {
+                    continue;
+                }
+
+                // Then compute a new value
+                int neigh_score = current_node.score + unit.getUnitType().getMovementCost(getterrainAtPosition(neigh));
+                // Ignore infinite values -> Water
+                if (neigh_score == Integer.MAX_VALUE) {
+                    continue;
+                }
+
+                // If the value is larger thaan the unit can covcer, ignore
+                if (neigh_score > unit.getUnitType().getMovement()) {
+                    continue;
+                }
+
+                // Compare with the old best
+                Integer curr_score = best.get(neigh);
+                if (curr_score == null || neigh_score < curr_score) {
+                    // Update the values
+                    best.put(neigh, neigh_score);
+                    frontier.add(new SearchNode(pos, neigh_score));
+                    // Add only those places that is not the origin -> tehnicaly can't reach where I already am
+                    if (!neigh.equals(pos)) {
+                        reachable.add(neigh);
+                    }
+                }
+            }
+        }
+
+        // Return the results
+        List<Position> result = new ArrayList<>(reachable);
+        // Sort by closest position first
+        Collections.sort(result, new PositionComparator());
+        return result;
     }
 
     /**
