@@ -70,6 +70,48 @@ public class Game {
     }
 
     /**
+     * @brief Move the unit from position to the other
+     * 
+     * @param from The position to move from
+     * @param to The position to move to
+     * 
+     * @return True if movement proceeded, false otherwise
+     */
+    public boolean moveUnit(Position from, Position to) {
+        // Check that the position s for moving are valid
+        if (from == null || to == null) {
+            return false;
+        }
+
+        // Check at other possibilities
+
+        // Can't move in same position
+        if (from.equals(to)) {
+            return false;
+        }
+
+        // Can't move outside of teh board
+        if (!isInside(to)) {
+            return false;
+        }
+
+        // Get the unit at the position
+        Unit unit = this.units_map.get(from);
+        
+        // Check that there is any unit at the position even
+        if (unit == null) {
+            return false;
+        }
+
+        // Then we can move
+        units_map.remove(from);
+        unit.setPosition(to);
+        units_map.put(to, unit);
+
+        return true;
+    }
+
+    /**
      * @brief Given the current position, perform weighted pathfinding and find all the reachbale positions viable
      * 
      * @param pos The position of the unit

@@ -109,8 +109,8 @@ public enum UnitType {
     public int getMovementCost(Terrain terrain) {
         return switch (terrain) {
             case PLAIN -> 1;
-            case FOREST -> this.movement_type == VEHICLE ? 2 : 1;
-            case MOUNTAIN -> this.movement_type == VEHICLE ? Integer.MAX_VALUE : 2;
+            case FOREST -> (this.movement_type == VEHICLE) ? 2 : 1;
+            case MOUNTAIN -> (this.movement_type == VEHICLE) ? Integer.MAX_VALUE : 2;
             case WATER -> Integer.MAX_VALUE;
             case CITY -> 1;
             case FACTORY -> 1;
