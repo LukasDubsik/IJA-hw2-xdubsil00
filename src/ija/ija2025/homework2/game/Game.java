@@ -228,7 +228,7 @@ public class Game {
                 if (curr_score == null || neigh_score < curr_score) {
                     // Update the values
                     best.put(neigh, neigh_score);
-                    frontier.add(new SearchNode(pos, neigh_score));
+                    frontier.add(new SearchNode(neigh, neigh_score));
                     // Add only those places that is not the origin -> tehnicaly can't reach where I already am
                     if (!neigh.equals(pos)) {
                         reachable.add(neigh);
