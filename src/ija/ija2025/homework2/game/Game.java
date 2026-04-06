@@ -23,6 +23,8 @@ public class Game {
     private Terrain[][] map; ///< The map of the game
     private Map<Position, Unit> units_map = new HashMap<>(); ///< Position to unit
 
+    private int rows; ///< Number of rows of the map
+    private int columns; ///< Number of ciolumns of the map
     
     /**
      * @brief The constructor of the Game class
@@ -32,6 +34,9 @@ public class Game {
     Game(Terrain[][] map_) {
         // Make sure the games are independent by copying the input map
         this.map = copyInputMap(map_);
+        // Acquire some values for easier future analysis
+        this.rows = map.length;
+        this.columns = map[0].length;
     }
 
     /**
@@ -155,6 +160,19 @@ public class Game {
         // Sort by closest position first
         Collections.sort(result, new PositionComparator());
         return result;
+    }
+
+    /**
+     * @brief Check if the Positional node is within the map
+     * 
+     * @param pos The position we are checking for
+     * 
+     * @return Returns true if inside, false if outside
+     */
+    private boolean isInside(Position pos) {
+        boolean row_check = pos.row() >= 0 && pos.row() < rows;
+        boolean column_check = pos.column() >= 0 && pos.column() < columns;
+        return row_check && column_check;
     }
 
     /**
