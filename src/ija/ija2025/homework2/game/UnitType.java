@@ -108,8 +108,8 @@ public enum UnitType {
      */
     public int getMovementCost(Terrain terrain) {
         return switch (this.movement_type) {
-            case VEHICLE -> terrain.getInfantryCost();
-            case INFANTRY -> terrain.getVehicleCost();
+            case VEHICLE -> terrain.getVehicleCost();
+            case INFANTRY -> terrain.getInfantryCost();
         };
     }
 

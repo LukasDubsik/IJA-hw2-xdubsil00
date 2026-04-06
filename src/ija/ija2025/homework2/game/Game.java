@@ -212,11 +212,14 @@ public class Game {
                 }
 
                 // Then compute a new value
-                int neigh_score = current_node.score + unit.getUnitType().getMovementCost(getTerrainAtPosition(neigh));
+                int move_score = unit.getUnitType().getMovementCost(getTerrainAtPosition(neigh));
                 // Ignore infinite values -> Water
-                if (neigh_score == Integer.MAX_VALUE) {
+                if (move_score == Integer.MAX_VALUE) {
                     continue;
                 }
+
+                // The full score of movement
+                int neigh_score = move_score + current_node.score;
 
                 // If the value is larger thaan the unit can covcer, ignore
                 if (neigh_score > unit.getUnitType().getMovement()) {
