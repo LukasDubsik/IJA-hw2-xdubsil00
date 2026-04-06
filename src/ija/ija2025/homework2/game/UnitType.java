@@ -100,6 +100,25 @@ public enum UnitType {
     }
 
     /**
+     * @brif Get the movement cost of the unit for the given terrain type
+     * 
+     * @param terrain The terrain to analyze the movement for
+     * 
+     * @return The integer cost of the movement
+     */
+    public int getMovementCost(Terrain terrain) {
+        return switch (terrain) {
+            case PLAIN -> 1;
+            case FOREST -> this.movement_type == VEHICLE ? 2 : 1;
+            case MOUNTAIN -> this.movement_type == VEHICLE ? Integer.MAX_VALUE : 2;
+            case WATER -> Integer.MAX_VALUE;
+            case CITY -> 1;
+            case FACTORY -> 1;
+            case HQ -> 1;
+        };
+    }
+
+    /**
      * @brief Given enum in teh String form, create from it the enum
      * 
      * @param type The string enum value.
