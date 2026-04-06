@@ -40,7 +40,7 @@ public enum Terrain {
      */
     public static Terrain convert(String type) {
         // Check that the input isn't null
-        if (type == null || type.trim().length() != 0) {
+        if (type == null || type.trim().length() == 0) {
             throw new IllegalArgumentException("Expected a single Letter input.");
         }
 
