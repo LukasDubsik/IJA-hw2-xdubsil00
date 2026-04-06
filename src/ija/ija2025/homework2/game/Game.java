@@ -132,6 +132,16 @@ public class Game {
             return false;
         }
 
+        // Can't move to an already occupied place
+        if (units_map.containsKey(to)) {
+            return false;
+        }
+
+        // Can only move to where it can access
+        if (!getReachableTiles(from).contains(to)) {
+            return false;
+        }
+
         // Get the unit at the position
         Unit unit = this.units_map.get(from);
         
