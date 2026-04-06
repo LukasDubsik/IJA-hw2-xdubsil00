@@ -1,6 +1,7 @@
 package ija.ija2025.homework2.game;
 
 import ija.ija2025.homework2.common.Position;
+import ija.ija2025.homework2.tool.GameObserver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +26,8 @@ public class Game {
 
     private int rows; ///< Number of rows of the map
     private int columns; ///< Number of ciolumns of the map
+
+    private List<GameObserver> observers = new ArrayList<>();
     
     /**
      * @brief The constructor of the Game class
@@ -37,6 +40,14 @@ public class Game {
         // Acquire some values for easier future analysis
         this.rows = map.length;
         this.columns = map[0].length;
+    }
+
+    public void addObserver(GameObserver observer) {
+        // Check we can add it
+        if (observer != null && !observers.contains(observer)) {
+            // Then add it
+            observers.add(observer);
+        }
     }
 
     /**
