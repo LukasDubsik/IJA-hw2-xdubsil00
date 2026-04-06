@@ -63,6 +63,15 @@ public class Unit {
     }
 
     /**
+     * @brief Set the new unit's position
+     * 
+     * @param pos The position to change to
+     */
+    public void setPosition(Position pos) {
+        this.position = pos;
+    }
+
+    /**
      * @brief Convert to String representation
      */
     @Override
