@@ -130,7 +130,7 @@ public class Game {
                 }
 
                 // Then compute a new value
-                int neigh_score = current_node.score + unit.getUnitType().getMovementCost(getterrainAtPosition(neigh));
+                int neigh_score = current_node.score + unit.getUnitType().getMovementCost(getTerrainAtPosition(neigh));
                 // Ignore infinite values -> Water
                 if (neigh_score == Integer.MAX_VALUE) {
                     continue;
@@ -173,6 +173,17 @@ public class Game {
         boolean row_check = pos.row() >= 0 && pos.row() < rows;
         boolean column_check = pos.column() >= 0 && pos.column() < columns;
         return row_check && column_check;
+    }
+
+    /**
+     * @brief Get the terrain at the map's position
+     * 
+     * @param pos The position to which to get the terrain from
+     * 
+     * @return The terrain at the position.
+     */
+    private Terrain getTerrainAtPosition(Position pos) {
+        return map[pos.row()][pos.column()];
     }
 
     /**
