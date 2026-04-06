@@ -4,7 +4,9 @@ import ija.ija2025.homework2.common.Position;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 /**
  * @class Game
@@ -55,6 +57,26 @@ public class Game {
         units_map.put(position, unit);
 
         return unit;
+    }
+
+    /**
+     * @brief Given the current position, perform weighted pathfinding and find all the reachbale positions viable
+     * 
+     * @param pos The position of the unit
+     */
+    public List<Position> getReachableTiles(Position pos) {
+        // Check that the unit is even at the position
+        Unit unit = this.units_map.get(pos);
+        if (unit == null) {
+            // Return a list of nothing -> No unit, can't go anywhere
+            return List.of();
+        }
+
+        // Initialize the values for search
+        // The map of the reachable positions with the best cost possible
+        Map<Position, Integer> best = new HashMap<>();
+        // The search queu to explore -> Djikstra
+        PriorityQueue<SearchNode> frontier = new PriorityQueue<>(new SearchNodeComparator());
     }
 
     /**
