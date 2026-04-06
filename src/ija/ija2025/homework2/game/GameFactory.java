@@ -1,5 +1,8 @@
 package ija.ija2025.homework2.game;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,28 @@ public class GameFactory {
     private GameFactory() {
 
     }  
+
+    /**
+     * @brief Create the game map from a file
+     * 
+     * @param mapFile The path to the map file
+     * 
+     * @return The newly created empty game
+     */
+    public static Game createGame(Path map) {
+        // Check if the file is not empty
+        if (map == null) {
+            throw new IllegalArgumentException("Map file path cannot be empty!");
+        }
+
+        // Attempt to read all the map file lines
+        try {
+            List<String> lines = Files.readAllLines(map);
+            return createGame(lines.toArray(String[]::new));
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Cannot read map file: " + map, e);
+        }
+    }
 
     /**
      * @brief Taking the input map, convert it into internal enum format and then init the Game class.
