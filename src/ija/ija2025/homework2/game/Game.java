@@ -134,11 +134,17 @@ public class Game {
 
         // Can move in the same position -> like artillery
         if (from.equals(to)) {
+            notifyObservers(new GameEvent());
             return true;
         }
 
         // Can't move outside of teh board
         if (!isInside(to)) {
+            return false;
+        }
+
+        // Can't start from outside the border
+        if (!isInside(from)) {
             return false;
         }
 
