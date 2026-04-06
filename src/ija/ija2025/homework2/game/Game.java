@@ -232,8 +232,13 @@ public class Game {
                     continue;
                 }
 
-                // Check if it is occupied - ignore
-                if (units_map.containsKey(neigh)) {
+                // Get the current occupant
+                Unit occupant = units_map.get(neigh);
+                // Check if truly occupied
+                boolean occupied = occupant != null;
+
+                // If occupied by an enemy, skip, blocking a movement
+                if (occupied && occupant.getOwner() != unit.getOwner()) {
                     continue;
                 }
 
@@ -258,8 +263,10 @@ public class Game {
                     // Update the values
                     best.put(neigh, neigh_score);
                     frontier.add(new SearchNode(neigh, neigh_score));
+
                     // Add only those places that is not the origin -> tehnicaly can't reach where I already am
-                    if (!neigh.equals(pos)) {
+                    // Friendly tiles are pass through, but not viable end positions
+                    if (!neigh.equals(pos) && !occupied) {
                         reachable.add(neigh);
                     }
                 }
