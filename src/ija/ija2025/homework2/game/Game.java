@@ -145,6 +145,9 @@ public class Game {
         unit.setPosition(to);
         units_map.put(to, unit);
 
+        // Notify the observers
+        notifyObservers(new GameEvent());
+
         return true;
     }
 
