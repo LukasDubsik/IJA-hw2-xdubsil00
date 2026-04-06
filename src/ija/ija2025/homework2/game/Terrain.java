@@ -33,6 +33,24 @@ public enum Terrain {
     }
 
     /**
+     * @brief Return the cost of infantry movement for that terrain
+     * 
+     * @return The cost of the infantry movement.
+     */
+    public int getInfantryCost() {
+        return infantry_cost;
+    }
+
+    /**
+     * @brief Return the cost of vehicle movement for that terrain
+     * 
+     * @return The cost of the vehicle movement.
+     */
+    public int getVehicleCost() {
+        return vehicle_cost;
+    }
+
+    /**
      * @brief Given enum in teh String form, create from it the enum
      * 
      * @param type The string enum value.

@@ -107,14 +107,9 @@ public enum UnitType {
      * @return The integer cost of the movement
      */
     public int getMovementCost(Terrain terrain) {
-        return switch (terrain) {
-            case PLAIN -> 1;
-            case FOREST -> (this.movement_type == MovementType.VEHICLE) ? 2 : 1;
-            case MOUNTAIN -> (this.movement_type == MovementType.VEHICLE) ? Integer.MAX_VALUE : 2;
-            case WATER -> Integer.MAX_VALUE;
-            case CITY -> 1;
-            case FACTORY -> 1;
-            case HQ -> 1;
+        return switch (this.movement_type) {
+            case VEHICLE -> terrain.getInfantryCost();
+            case INFANTRY -> terrain.getVehicleCost();
         };
     }
 
