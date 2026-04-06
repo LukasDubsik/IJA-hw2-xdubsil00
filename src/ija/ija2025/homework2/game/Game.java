@@ -1,5 +1,6 @@
 package ija.ija2025.homework2.game;
 
+import ija.ija2025.homework2.common.GameEvent;
 import ija.ija2025.homework2.common.Position;
 import ija.ija2025.homework2.tool.GameObserver;
 
@@ -42,11 +43,36 @@ public class Game {
         this.columns = map[0].length;
     }
 
+    /**
+     * @brief Add observer to the active list of observers
+     * 
+     * @param observer The observer class to be added
+     */
     public void addObserver(GameObserver observer) {
         // Check we can add it
         if (observer != null && !observers.contains(observer)) {
             // Then add it
             observers.add(observer);
+        }
+    }
+
+    /**
+     * @brief Remove an observer from the list of active ones
+     * 
+     * @param observer The observer to remove
+     */
+    public void removeObserver(GameObserver observer) {
+        observers.remove(observer);
+    }
+
+    /**
+     * @brief Notify all the currently linked observers
+     * 
+     * @param event The event to be notified of
+     */
+    private void notifyObservers(GameEvent event) {
+        for (GameObserver observer : observers) {
+            observer.update(event);
         }
     }
 
