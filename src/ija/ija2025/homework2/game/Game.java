@@ -142,8 +142,11 @@ public class Game {
             return false;
         }
 
-        // Can't move to an already occupied place
-        if (units_map.containsKey(to)) {
+        // Get the unit at the position
+        Unit unit = this.units_map.get(from);
+        
+        // Check that there is any unit at the position even
+        if (unit == null) {
             return false;
         }
 
@@ -153,16 +156,13 @@ public class Game {
             return true;
         }
 
-        // Can only move to where it can access
-        if (!getReachableTiles(from).contains(to)) {
+        // Can't move to an already occupied place
+        if (units_map.containsKey(to)) {
             return false;
         }
 
-        // Get the unit at the position
-        Unit unit = this.units_map.get(from);
-        
-        // Check that there is any unit at the position even
-        if (unit == null) {
+        // Can only move to where it can access
+        if (!getReachableTiles(from).contains(to)) {
             return false;
         }
 
@@ -238,7 +238,7 @@ public class Game {
                 boolean occupied = occupant != null;
 
                 // If occupied by an enemy, skip, blocking a movement
-                if (occupied && occupant.getOwner().equals(unit.getOwner())) {
+                if (occupied && !occupant.getOwner().equals(unit.getOwner())) {
                     continue;
                 }
 
