@@ -3,6 +3,7 @@ package ija.ija2025.homework2.game;
 import ija.ija2025.homework2.common.Position;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,5 +97,67 @@ public class Game {
 
         // Return the copied form
         return copy;
+    }
+
+    // Classes for search algorithm
+
+    /**
+     * @class SearchNode
+     * @brief Class to hold the value of a node when deciding upon weighted search
+     */
+    private class SearchNode {
+        Position pos; ///< The node's position within the map
+        int score; ///< Its score determining the least amount of movements necessary to get there
+
+        /**
+         * @brief Initialisation of the SearchNode class
+         * 
+         * @param pos_ Position within map
+         * @param score_ Least amount to get there yet found
+         */
+        SearchNode(Position pos_, int score_) {
+            this.pos = pos_;
+            this.score = score_;
+        }
+    }
+
+    /**
+     * @class PositionComparator
+     * @brief Used to compare two positions between each other
+     */
+    private class PositionComparator implements Comparator<Position> {
+
+        /**
+         * @brief Compare two positions
+         * 
+         * @param one The first position for comparison
+         * @param two The second position to compare
+         */
+        @Override
+        public int compare(Position one, Position two) {
+            Integer compared = Integer.compare(one.row(), two.row());
+            if (compared != 0) {
+                return compared;
+            }
+            return Integer.compare(one.column(), two.column());
+        }
+    }
+
+    /**
+     * @class SearchNodeComparator
+     * @brief Used to compare two Search positions between each other based on a score
+     */
+    private class SearchNodeComparator implements Comparator<SearchNode> {
+
+        /**
+         * @brief Compare two Search positions
+         * 
+         * @param one The first Search position for comparison
+         * @param two The second Search  to compare
+         */
+        @Override
+        public int compare(SearchNode one, SearchNode two) {
+            return Integer.compare(one.score, two.score);
+        }
     }
 }
