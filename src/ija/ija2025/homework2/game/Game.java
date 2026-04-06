@@ -194,10 +194,10 @@ public class Game {
             // Create a list of neighbors then, this node is worth exploring
             List<Position> neighbors = new ArrayList<>();
             // Add the individual neighbors
-            neighbors.add(new Position(pos.row() - 1, pos.column()));
-            neighbors.add(new Position(pos.row() + 1, pos.column()));
-            neighbors.add(new Position(pos.row(), pos.column() - 1));
-            neighbors.add(new Position(pos.row(), pos.column() + 1));
+            neighbors.add(new Position(current_node.pos.row() - 1, current_node.pos.column()));
+            neighbors.add(new Position(current_node.pos.row() + 1, current_node.pos.column()));
+            neighbors.add(new Position(current_node.pos.row(), current_node.pos.column() - 1));
+            neighbors.add(new Position(current_node.pos.row(), current_node.pos.column() + 1));
 
             // Then for each of the neighbors, compute cost
             for (Position neigh : neighbors) {
