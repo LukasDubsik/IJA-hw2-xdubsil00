@@ -71,7 +71,7 @@ public class Game {
      * @param event The event to be notified of
      */
     private void notifyObservers(GameEvent event) {
-        for (GameObserver observer : observers) {
+        for (GameObserver observer : List.copyOf(observers)) {
             observer.update(event);
         }
     }
@@ -132,12 +132,6 @@ public class Game {
 
         // Check at other possibilities
 
-        // Can move in the same position -> like artillery
-        if (from.equals(to)) {
-            notifyObservers(new GameEvent());
-            return true;
-        }
-
         // Can't move outside of teh board
         if (!isInside(to)) {
             return false;
@@ -151,6 +145,12 @@ public class Game {
         // Can't move to an already occupied place
         if (units_map.containsKey(to)) {
             return false;
+        }
+
+        // Can move in the same position -> like artillery
+        if (from.equals(to)) {
+            notifyObservers(new GameEvent());
+            return true;
         }
 
         // Can only move to where it can access
@@ -238,7 +238,7 @@ public class Game {
                 boolean occupied = occupant != null;
 
                 // If occupied by an enemy, skip, blocking a movement
-                if (occupied && occupant.getOwner() != unit.getOwner()) {
+                if (occupied && occupant.getOwner().equals(unit.getOwner())) {
                     continue;
                 }
 
